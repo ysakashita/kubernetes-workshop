@@ -1,0 +1,5 @@
+#!/bin/sh
+
+/usr/local/bin/watch -t "echo \"Nodes:\" && kubectl get nodes && \
+  echo \"\\nServices:\" && kubectl get svc && \
+	echo \"\\nPods:\" && kubectl get pods -o wide "
