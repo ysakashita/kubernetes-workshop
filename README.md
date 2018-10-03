@@ -1,2 +1,2 @@
 # kubernetes-workshop
-Kubernetes workshop 2018
+This repository store manifest files which use Kubernetes workshop 2018 in Kouchi University of Technology. 
