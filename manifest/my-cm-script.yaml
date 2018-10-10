@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-script
+data:
+  message.sh: |
+    #!/bin/sh
+    
+    echo "$PROP1" >/tmp/message.log
+
+    exit 0
