@@ -1,5 +1,5 @@
 name: build and publish containers
-on: [pull_check]
+on: [pull_request]
 
 jobs:
   build:
