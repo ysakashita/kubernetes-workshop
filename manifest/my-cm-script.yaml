@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: mysql-script
+  name: my-script
 data:
   message.sh: |
     #!/bin/sh

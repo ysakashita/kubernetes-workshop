@@ -20,4 +20,4 @@ spec:
   volumes:
     - name: my-script
       configMap:
-        name: mysql-script
+        name: my-script

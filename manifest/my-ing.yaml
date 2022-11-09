@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: my-nginx-ing
@@ -6,10 +6,13 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: web.192.168.99.100.xip.io
+  - host: web.192.168.59.100.nip.io
     http:
       paths:
-      - path: /hoge  
+      - pathType: Prefix
+        path: /hoge
         backend:
-          serviceName: my-nginx-service
-          servicePort: 80
+          service: 
+            name: my-nginx-service
+            port: 
+              number: 80
