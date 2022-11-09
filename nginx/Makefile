@@ -1,5 +1,5 @@
 REPOSITORY = ysakashita/my-nginx
-export: TAG := latest
+TAG = 20221107
 
 .PHONY: build container push
 

@@ -19,11 +19,6 @@ jobs:
     - name: build and push
       id: build-push
       run: |
-        TAG=latest
-        if [[ $GITHUB_REF == refs/tags/* ]]; then
-          TAG=${GITHUB_REF#refs/tags/}
-        fi
-        echo ${TAG}
         cd nginx
         make build
         make push
