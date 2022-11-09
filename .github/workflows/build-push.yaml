@@ -25,5 +25,6 @@ jobs:
         if [[ $GITHUB_REF == refs/tags/* ]]; then
           TAG=${GITHUB_REF#refs/tags/}
         fi
+        cd nginx
         make build
         make push
