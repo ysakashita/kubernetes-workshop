@@ -19,11 +19,11 @@ jobs:
     - name: build and push
       id: build-push
       run: |
-        IMAGE_TAG=latest
-        VERSION=git-$(git rev-parse --short HEAD)
+        TAG=latest
         if [[ $GITHUB_REF == refs/tags/* ]]; then
           TAG=${GITHUB_REF#refs/tags/}
         fi
+        echo ${TAG}
         cd nginx
         make build
         make push
