@@ -1,13 +1,11 @@
-REPOSITORY = ysakashita/nginx
-TAG = 191004
+REPOSITORY = ysakashita/my-nginx
+export: TAG := latest
 
 .PHONY: build container push
 
 all: build
 
-build: container
-
-container:
+build:
 	docker build -t $(REPOSITORY):$(TAG) .
 
 push: container
