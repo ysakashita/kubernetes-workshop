@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: node-exporter
+  namespace: monitoring
+spec:
+  selector:
+    matchLabels:
+      app: node-exporter
+  template:
+    metadata:
+      labels:
+        app: node-exporter
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/port: '9100'
+        prometheus.io/path: /metrics
+    spec:
+      tolerations:
+      - key: node-role.kubernetes.io/master
+        effect: NoSchedule
+      - key: app
+        value: gpu
+        effect: NoSchedule
+      containers:
+      - name: node-exporter
+        image: quay.io/prometheus/node-exporter:v1.4.0
+      hostNetwork: true
+      hostPID: true

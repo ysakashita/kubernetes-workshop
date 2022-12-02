@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: prometheus
+  name: prometheus
+  namespace: monitoring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus
+  serviceName: prometheus
+  template:
+    metadata:
+      labels:
+        app: prometheus
+    spec:
+      securityContext:
+        fsGroup: 0
+      serviceAccountName: default
+      dnsPolicy: ClusterFirst
+      containers:
+      - command:
+        - sh
+        - -c
+        - |
+          DEFAULT_STORAGE_TSDB_RETENTION_SIZE=950MB
+          : "${STORAGE_TSDB_RETENTION_SIZE:=${DEFAULT_STORAGE_TSDB_RETENTION_SIZE}}"
+          cmd="/bin/prometheus \
+          --config.file=/etc/prometheus/prometheus.yml \
+          --web.enable-lifecycle \
+          --web.enable-admin-api \
+          --storage.tsdb.path=/prometheus/data \
+          --storage.tsdb.min-block-duration=30m \
+          --storage.tsdb.retention.size ${STORAGE_TSDB_RETENTION_SIZE}"
+          $cmd
+          code=$?
+          echo "exit code: $code"
+          if [[ $code -ne 0 ]] && [[ $code -lt 126 ]] ; then
+            rm -rf /prometheus/data/*
+            $cmd
+          fi
+        image: quay.io/prometheus/prometheus:v2.40.1
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /-/healthy
+            port: 9090
+            scheme: HTTP
+          initialDelaySeconds: 5
+          timeoutSeconds: 5
+        name: prometheus
+        resources:
+          requests:
+            cpu: 200m
+            memory: 1000Mi
+        ports:
+        - containerPort: 9090
+        volumeMounts:
+        - mountPath: /etc/prometheus/
+          name: prometheus-config-volume
+        - mountPath: /prometheus/data
+          name: prometheus-vol
+      volumes:
+      - name: prometheus-config-volume
+        configMap:
+          defaultMode: 420
+          name: prometheus-server-conf
+  volumeClaimTemplates:
+  - metadata:
+      name: prometheus-vol
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 1Gi
+      storageClassName: standard
