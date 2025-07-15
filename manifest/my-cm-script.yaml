@@ -6,6 +6,5 @@ data:
   message.sh: |
     #!/bin/sh
     
-    echo "$PROP1" >/tmp/message.log
-
-    exit 0
+    echo "$PROP1"
+    sleep infinity
