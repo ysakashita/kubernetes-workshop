@@ -5,7 +5,7 @@ metadata:
   labels:
     app.kubernetes.io/component: exporter
     app.kubernetes.io/name: kube-state-metrics
-    app.kubernetes.io/version: 2.6.0
+    app.kubernetes.io/version: 2.16.0
   name: kube-state-metrics
   namespace: monitoring
 ---
@@ -15,7 +15,7 @@ metadata:
   labels:
     app.kubernetes.io/component: exporter
     app.kubernetes.io/name: kube-state-metrics
-    app.kubernetes.io/version: 2.6.0
+    app.kubernetes.io/version: 2.16.0
   name: kube-state-metrics
 rules:
 - apiGroups:
@@ -136,7 +136,7 @@ metadata:
   labels:
     app.kubernetes.io/component: exporter
     app.kubernetes.io/name: kube-state-metrics
-    app.kubernetes.io/version: 2.6.0
+    app.kubernetes.io/version: 2.16.0
   name: kube-state-metrics
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -153,7 +153,7 @@ metadata:
   labels:
     app.kubernetes.io/component: exporter
     app.kubernetes.io/name: kube-state-metrics
-    app.kubernetes.io/version: 2.6.0
+    app.kubernetes.io/version: 2.16.0
   name: kube-state-metrics
   namespace: monitoring
 spec:
@@ -174,7 +174,7 @@ metadata:
   labels:
     app.kubernetes.io/component: exporter
     app.kubernetes.io/name: kube-state-metrics
-    app.kubernetes.io/version: 2.6.0
+    app.kubernetes.io/version: 2.16.0
   name: kube-state-metrics
   namespace: monitoring
 spec:
@@ -187,11 +187,11 @@ spec:
       labels:
         app.kubernetes.io/component: exporter
         app.kubernetes.io/name: kube-state-metrics
-        app.kubernetes.io/version: 2.6.0
+        app.kubernetes.io/version: 2.16.0
     spec:
       automountServiceAccountToken: true
       containers:
-      - image: registry.k8s.io/kube-state-metrics/kube-state-metrics:v2.6.0
+      - image: registry.k8s.io/kube-state-metrics/kube-state-metrics:v2.16.0
         livenessProbe:
           httpGet:
             path: /healthz

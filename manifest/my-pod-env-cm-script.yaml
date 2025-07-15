@@ -8,6 +8,10 @@ spec:
     image: nginx:1.27
     ports:
     - containerPort: 80
+    command:
+    - /bin/sh
+    - -c
+    - /mnt/script/message.sh
     env:
     - name: PROP1
       valueFrom:
@@ -21,3 +25,4 @@ spec:
     - name: my-script
       configMap:
         name: my-script
+        defaultMode: 0755

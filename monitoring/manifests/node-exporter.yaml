@@ -24,6 +24,6 @@ spec:
         effect: NoSchedule
       containers:
       - name: node-exporter
-        image: quay.io/prometheus/node-exporter:v1.4.0
+        image: quay.io/prometheus/node-exporter:v1.9.1
       hostNetwork: true
       hostPID: true
